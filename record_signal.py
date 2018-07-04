@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Top Block
-# Generated: Fri Jun 22 16:57:17 2018
+# Generated: Wed Jul  4 10:19:55 2018
 ##################################################
 
 from distutils.version import StrictVersion
@@ -64,14 +64,14 @@ class top_block(gr.top_block, Qt.QWidget):
         ##################################################
         # Variables
         ##################################################
-        self.samp_rate = samp_rate = 96e3
+        self.samp_rate = samp_rate = 1800e3
 
         ##################################################
         # Blocks
         ##################################################
         self.rtlsdr_source_0 = osmosdr.source( args="numchan=" + str(1) + " " + '' )
         self.rtlsdr_source_0.set_sample_rate(samp_rate)
-        self.rtlsdr_source_0.set_center_freq(433896e3, 0)
+        self.rtlsdr_source_0.set_center_freq(433880e3, 0)
         self.rtlsdr_source_0.set_freq_corr(0, 0)
         self.rtlsdr_source_0.set_dc_offset_mode(0, 0)
         self.rtlsdr_source_0.set_iq_balance_mode(0, 0)
