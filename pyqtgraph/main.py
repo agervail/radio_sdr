@@ -114,8 +114,8 @@ class SideViewWidget(QtGui.QWidget):
         self.frequency_adjustement = QtGui.QDoubleSpinBox()
         self.frequency_adjustement.setRange(0, 2)
         self.frequency_adjustement.setValue(1)
-        self.frequency_adjustement.setSingleStep(0.001)
-        self.frequency_adjustement.setDecimals(3)
+        self.frequency_adjustement.setSingleStep(0.0001)
+        self.frequency_adjustement.setDecimals(4)
         self.frequency_adjustement.setPrefix("coeff freq adjustement : ")
         self.frequency_adjustement.valueChanged.connect(self.on_freq_adjustement)
         self.on_freq_adjustement()
@@ -206,6 +206,14 @@ class SideViewWidget(QtGui.QWidget):
         for v in df['val'][df['middle'] == True]:
             text_code += v
         self.code_result.setPlainText(text_code)
+        with open('arduino_header.txt', 'w') as f:
+            f.write("bool message[] =")
+            mess = '{'
+            for c in text_code: mess += c + ','
+            f.write(mess + '0};\n')
+            f.write('int message_size = ' + str(len(text_code) + 1) + ';\n')
+            f.write('int freq_ms = ' + str(int(round(1 / self.signal_sdr.clock_freq * 1000000))) +\
+                    ';')
 
 
 if __name__ == '__main__':
